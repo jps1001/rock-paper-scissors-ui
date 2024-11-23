@@ -1,15 +1,15 @@
 // ! Note: Logical operators have a lower priority than comparison operators and math operators.
 
-let score = JSON.parse(localStorage.getItem("score")) ?? {
-	wins: 0,
-	losses: 0,
-	ties: 0,
+let score = JSON.parse(localStorage.getItem('score')) ?? {
+  wins: 0,
+  losses: 0,
+  ties: 0,
 };
 
 const updateScoreElement = () => {
-	document.querySelector(
-		"p.js-score",
-	).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+  document.querySelector(
+    'p.js-score'
+  ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 };
 
 updateScoreElement();
@@ -18,13 +18,13 @@ updateScoreElement();
  * @returns {"rock" | "paper" | "scissors"}
  */
 const pickComputerMove = () => {
-	const randomNumber = Math.random();
+  const randomNumber = Math.random();
 
-	return randomNumber < 1 / 3
-		? "rock"
-		: randomNumber < 2 / 3
-		? "paper"
-		: "scissors";
+  return randomNumber < 1 / 3
+    ? 'rock'
+    : randomNumber < 2 / 3
+    ? 'paper'
+    : 'scissors';
 };
 
 /**
@@ -32,41 +32,41 @@ const pickComputerMove = () => {
  * @returns {void}
  */
 const playGame = (playerMove) => {
-	const computerMove = pickComputerMove();
+  const computerMove = pickComputerMove();
 
-	const result =
-		computerMove === playerMove
-			? "Tie"
-			: (computerMove === "rock" && playerMove === "scissors") ||
-			  (computerMove === "paper" && playerMove === "rock") ||
-			  (computerMove === "scissors" && playerMove === "paper")
-			? "You lose"
-			: "You win";
+  const result =
+    computerMove === playerMove
+      ? 'Tie'
+      : (computerMove === 'rock' && playerMove === 'scissors') ||
+        (computerMove === 'paper' && playerMove === 'rock') ||
+        (computerMove === 'scissors' && playerMove === 'paper')
+      ? 'You lose'
+      : 'You win';
 
-	result === "You win"
-		? score.wins++
-		: result === "You lose"
-		? score.losses++
-		: score.ties++;
+  result === 'You win'
+    ? score.wins++
+    : result === 'You lose'
+    ? score.losses++
+    : score.ties++;
 
-	localStorage.setItem("score", JSON.stringify(score));
+  localStorage.setItem('score', JSON.stringify(score));
 
-	updateScoreElement();
+  updateScoreElement();
 
-	document.querySelector("p.js-result").innerHTML = `${result}.`;
+  document.querySelector('p.js-result').innerHTML = `${result}.`;
 
-	document.querySelector("p.you-computer").innerHTML =
-		"You &centerdot; Computer";
+  document.querySelector('p.you-computer').innerHTML =
+    'You &centerdot; Computer';
 
-	document.querySelector("p.js-moves-chosen").innerHTML = `
+  document.querySelector('p.js-moves-chosen').innerHTML = `
 	<div class="result-image-container">
 		<img alt="${playerMove[0].toUpperCase}${playerMove.slice(
-		1,
-	)} Emoji" src="images/${playerMove}-emoji.png" class="move-icon" />
+    1
+  )} Emoji" src="images/${playerMove}-emoji.png" class="move-icon" />
 
 		<img alt="${computerMove[0].toUpperCase}${computerMove.slice(
-		1,
-	)} Emoji" src="images/${computerMove}-emoji.png" class="move-icon" />
+    1
+  )} Emoji" src="images/${computerMove}-emoji.png" class="move-icon" />
 	</div>
 	`;
 };
@@ -74,34 +74,34 @@ const playGame = (playerMove) => {
 let intervalID;
 
 const resetScore = () => {
-	score = { wins: 0, losses: 0, ties: 0 };
-	updateScoreElement();
-	localStorage.removeItem("score");
+  score = { wins: 0, losses: 0, ties: 0 };
+  updateScoreElement();
+  localStorage.removeItem('score');
 };
 
 // Better than onclick attribute.
-const rockButton = document.querySelector("button.js-rock-button");
+const rockButton = document.querySelector('button.js-rock-button');
 
-rockButton.addEventListener("click", () => playGame("rock"));
+rockButton.addEventListener('click', () => playGame('rock'));
 
-const paperButton = document.querySelector("button.js-paper-button");
+const paperButton = document.querySelector('button.js-paper-button');
 
-paperButton.addEventListener("click", () => playGame("paper"));
+paperButton.addEventListener('click', () => playGame('paper'));
 
-const scissorsButton = document.querySelector("button.js-scissors-button");
+const scissorsButton = document.querySelector('button.js-scissors-button');
 
-scissorsButton.addEventListener("click", () => playGame("scissors"));
+scissorsButton.addEventListener('click', () => playGame('scissors'));
 
 const confirmationContainerDiv = document.querySelector(
-	"div.js-confirmation-container",
+  'div.js-confirmation-container'
 );
 
 const resetConfirmation = () => {
-	confirmationContainerDiv.innerHTML = "";
+  confirmationContainerDiv.innerHTML = '';
 };
 
 const resetScoreConfirmationPopup = () => {
-	confirmationContainerDiv.innerHTML = `
+  confirmationContainerDiv.innerHTML = `
 			<p class="reset-score-confirmation-message">
 				Are you sure you want to reset the score?
 			</p>
@@ -110,64 +110,65 @@ const resetScoreConfirmationPopup = () => {
 			<button class="no-button js-no-button">No (N)</button>
 			`;
 
-	const yesButton = document.querySelector("button.js-yes-button");
-	const noButton = document.querySelector("button.js-no-button");
+  const yesButton = document.querySelector('button.js-yes-button');
+  const noButton = document.querySelector('button.js-no-button');
 
-	yesButton.addEventListener("click", () => {
-		resetScore();
-		resetConfirmation();
-	});
+  yesButton.addEventListener('click', () => {
+    resetScore();
+    resetConfirmation();
+  });
 
-	noButton.addEventListener("click", () => {
-		resetConfirmation();
-	});
+  noButton.addEventListener('click', () => {
+    resetConfirmation();
+  });
 };
 
-const resetScoreButton = document.querySelector("button.js-reset-score-button");
+const resetScoreButton = document.querySelector('button.js-reset-score-button');
 
-resetScoreButton.addEventListener("click", resetScoreConfirmationPopup);
+resetScoreButton.addEventListener('click', resetScoreConfirmationPopup);
 
-const autoPlayButton = document.querySelector("button.js-auto-play-button");
+const autoPlayButton = document.querySelector('button.js-auto-play-button');
 
-autoPlayButton.addEventListener("click", autoPlay);
+autoPlayButton.addEventListener('click', autoPlay);
 
-document.addEventListener("keydown", (event) => {
-	switch (event.key) {
-		case "r":
-			playGame("rock");
-			break;
-		case "p":
-			playGame("paper");
-			break;
-		case "s":
-			playGame("scissors");
-			break;
-		case "a":
-			autoPlay();
-			break;
-		case "Backspace":
-			resetScoreConfirmationPopup();
-			break;
-		case "y":
-			document.querySelector("button.js-yes-button") &&
-				(resetScore() || resetConfirmation());
-			break;
-		case "n":
-			document.querySelector("button.js-no-button") && resetConfirmation();
-			break;
-	}
+document.addEventListener('keydown', (event) => {
+  console.log(event.key);
+  switch (event.key) {
+    case 'r':
+      playGame('rock');
+      break;
+    case 'p':
+      playGame('paper');
+      break;
+    case 's':
+      playGame('scissors');
+      break;
+    case 'a':
+      autoPlay();
+      break;
+    case 'Backspace':
+      resetScoreConfirmationPopup();
+      break;
+    case 'y':
+      document.querySelector('button.js-yes-button') &&
+        (resetScore() || resetConfirmation());
+      break;
+    case 'n':
+      document.querySelector('button.js-no-button') && resetConfirmation();
+      break;
+  }
 });
 
 // Personal preference if arrow function or not.
 function autoPlay() {
-	if (autoPlayButton.innerHTML.trim() === "Auto Play (A)") {
-		autoPlayButton.innerHTML = "Stop Auto Play (A)";
+  if (autoPlayButton.innerHTML.trim() === 'Auto Play (A)') {
+    autoPlayButton.innerHTML = 'Stop Auto Play (A)';
 
-		intervalID = setInterval(() => playGame(pickComputerMove()), 1000);
-	} else {
-		// Stops a setInterval function.
-		clearInterval(intervalID);
+    intervalID = setInterval(() => playGame(pickComputerMove()), 1000);
+  } else {
+    // Stops a setInterval function.
+    clearInterval(intervalID);
 
-		autoPlayButton.innerHTML = "Auto Play (A)";
-	}
+    autoPlayButton.innerHTML = 'Auto Play (A)';
+  }
 }
