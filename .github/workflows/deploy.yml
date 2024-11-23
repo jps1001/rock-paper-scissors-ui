@@ -28,7 +28,7 @@ jobs:
       # Build and push Docker images
       - name: Build and push Docker images
         run: |
-          IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/my-app
+          IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/rock-paper-scissors
           COMMIT_SHA=${{ github.sha }}
           # Build the Docker image
           docker build -t $IMAGE_NAME:$COMMIT_SHA -t $IMAGE_NAME:latest .
