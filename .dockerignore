@@ -1,0 +1,10 @@
+node_modules
+.github
+.vscode
+.gitignore
+.dockerignore
+package.json
+package-lock.json
+README.md
+run.sh
+stop.sh
