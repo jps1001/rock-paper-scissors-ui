@@ -1,6 +1,6 @@
 version: '2'
 services:
-  book-ui:
+  rock-paper-scissors:
     image: x23208937/rock-paper-scissors:latest
     container_name: rock-paper-scissors-app
     ports:
