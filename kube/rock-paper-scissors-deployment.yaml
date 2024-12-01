@@ -28,6 +28,12 @@ spec:
           name: rock-paper-scissors-app
           ports:
             - containerPort: 80
-          resources: {}
+          resources:
+            requests:
+              cpu: '200m'
+              memory: '256Mi'
+            limits:
+              cpu: '500m'
+              memory: '512Mi'
       restartPolicy: Always
 status: {}
